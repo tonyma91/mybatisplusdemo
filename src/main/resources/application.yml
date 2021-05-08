@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/abc?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://47.112.232.249:3306/abc?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+#    url: jdbc:mysql://47.112.232.249:3306/abc?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+server:
+  port: 8080
+#  控制太打印查询日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+time: 123312
+
+

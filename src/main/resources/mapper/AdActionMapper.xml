@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laoma.mybatisdemo.mapper.AdActionMapper">
+  <resultMap id="BaseResultMap" type="com.laoma.mybatisdemo.bean.AdAction">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="action_name" jdbcType="VARCHAR" property="actionName" />
+    <result column="action_value" jdbcType="VARCHAR" property="actionValue" />
+    <result column="create_operator" jdbcType="VARCHAR" property="createOperator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.laoma.mybatisdemo.bean.AdAction">
+    <result column="action_note" jdbcType="LONGVARCHAR" property="actionNote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, action_name, action_value, create_operator, create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    action_note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ad_action
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ad_action
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.laoma.mybatisdemo.bean.AdAction">
+    insert into ad_action (id, action_name, action_value, 
+      create_operator, create_time, action_note
+      )
+    values (#{id,jdbcType=INTEGER}, #{actionName,jdbcType=VARCHAR}, #{actionValue,jdbcType=VARCHAR}, 
+      #{createOperator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{actionNote,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.laoma.mybatisdemo.bean.AdAction">
+    insert into ad_action
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="actionName != null">
+        action_name,
+      </if>
+      <if test="actionValue != null">
+        action_value,
+      </if>
+      <if test="createOperator != null">
+        create_operator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="actionNote != null">
+        action_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="actionName != null">
+        #{actionName,jdbcType=VARCHAR},
+      </if>
+      <if test="actionValue != null">
+        #{actionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperator != null">
+        #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionNote != null">
+        #{actionNote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.laoma.mybatisdemo.bean.AdAction">
+    update ad_action
+    <set>
+      <if test="actionName != null">
+        action_name = #{actionName,jdbcType=VARCHAR},
+      </if>
+      <if test="actionValue != null">
+        action_value = #{actionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperator != null">
+        create_operator = #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actionNote != null">
+        action_note = #{actionNote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.laoma.mybatisdemo.bean.AdAction">
+    update ad_action
+    set action_name = #{actionName,jdbcType=VARCHAR},
+      action_value = #{actionValue,jdbcType=VARCHAR},
+      create_operator = #{createOperator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      action_note = #{actionNote,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.laoma.mybatisdemo.bean.AdAction">
+    update ad_action
+    set action_name = #{actionName,jdbcType=VARCHAR},
+      action_value = #{actionValue,jdbcType=VARCHAR},
+      create_operator = #{createOperator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
